@@ -48,6 +48,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
          self::purgeRelations($config);
          self::purgeItems($config);
          self::purgeOthers($config);
+         self::purgeGenericobject($config);
          $logs_after = self::getLogsCount();
          $task->addVolume($logs_before - $logs_after);
       } else {
@@ -213,6 +214,28 @@ class PluginPurgelogsPurge extends CommonDBTM {
             $DB->query($query);
          }
           
+      }
+   }
+
+   static function purgeGenericobject($config) {
+      global $DB;
+      $month = self::getDateModRestriction($config->fields['purge_genericobject_unusedtypes']);
+      if ($month) {
+         $query = "SELECT DISTINCT `itemtype`
+                   FROM `glpi_logs`
+                   WHERE `itemtype` LIKE '%PluginGenericobject%'
+                   GROUP BY `itemtype`";
+         $types = array();
+         foreach ($DB->request($query) as $type) {
+            if (!class_exists($type['itemtype'])) {
+               $types[] = "'".$type['itemtype']."'";
+            }
+         }
+         if (!empty($types)) {
+            $types_string = implode(',', $types);
+            $query = "DELETE FROM `glpi_logs` WHERE `itemtype` IN ($types_string) $month";
+            $DB->query($query);
+         }
       }
    }
    

@@ -198,7 +198,9 @@ JAVASCRIPT;
       echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][7]."</td><td>";
       self::showInterval('purge_webservices_logs', $this->fields["purge_webservices_logs"]);
       echo "</td>";
-      echo "<td colspan='2'></td></tr>";
+      echo "<td class='center'>".$LANG['plugin_purgelogs'][21]."</td><td>";
+      self::showInterval('purge_genericobject_unusedtypes', $this->fields["purge_genericobject_unusedtypes"]);
+      echo "</td></tr>";
       
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='4' class='center'>";
@@ -261,6 +263,7 @@ JAVASCRIPT;
                      `purge_updateitem` tinyint(1) NOT NULL default '0',
                      `purge_comments` tinyint(1) NOT NULL default '0',
                      `purge_datemod` tinyint(1) NOT NULL default '0',
+                     `purge_genericobject_unusedtypes` tinyint(1) NOT NULL default '0',
                      PRIMARY KEY  (`id`)
                   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
                $DB->query($query) or die ($DB->error());

@@ -48,3 +48,4 @@ $LANG['plugin_purgelogs'][17] = "Add relation between items";
 $LANG['plugin_purgelogs'][18] = "Delete relation between items";
 $LANG['plugin_purgelogs'][19] = "Logs purge configuration";
 $LANG['plugin_purgelogs'][20] = "Change all";
+$LANG['plugin_purgelogs'][21] = "Old Genericobject item types";
