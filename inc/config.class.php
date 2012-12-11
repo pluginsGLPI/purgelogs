@@ -59,14 +59,31 @@ class PluginPurgelogsConfig extends CommonDBTM {
       return $LANG['plugin_purgelogs']['title'][1];
    }
    
-   function showForm(){
+   function showForm() {
       global $LANG;
       
       $this->getFromDB(1);
-      echo "<form name='form' method='post' action='".$this->getFormURL()."'>";
+      echo "<form name='form' id='purgelogs_form' method='post' action='".$this->getFormURL()."'>";
       echo "<div class='center'>";
       echo "<table class='tab_cadre_fixe'>";
       echo "<tr align='center'><th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
+      echo "<tr align='center'><th colspan='4'>";
+      echo $JS = <<<JAVASCRIPT
+         <script type='text/javascript'>
+            function form_init_all(form, val) {
+               var elem = document.getElementById('purgelogs_form').elements;
+               for(var i = 0; i < elem.length; i++) {
+                  if (elem[i].type == "select-one") {
+                     elem[i].selectedIndex = val;
+                  }
+               }
+            }
+         </script>
+JAVASCRIPT;
+      self::showInterval('init_all', 0, array(
+         'on_change' => "form_init_all(this.form, this.value);"
+      ));
+      echo "</th></tr>";
       echo "<input type='hidden' name='id' value='1'>";
       
       echo "<tr align='center'><th colspan='4'>".$LANG['help'][30]."</th></tr>";
@@ -193,14 +210,15 @@ class PluginPurgelogsConfig extends CommonDBTM {
       Html::closeForm();
    }
    
-   static function showInterval($name, $value) {
+   static function showInterval($name, $value, $options=array()) {
       global $LANG;
       $values[-1] = $LANG['common'][66];
       $values[0]  = $LANG['setup'][307];
       for ($i = 1; $i < 121; $i++) {
          $values[$i] = $i. " ".$LANG['calendar'][14];
       }
-      return Dropdown::showFromArray($name, $values, array('value' => $value));
+      $options['value'] = $value;
+      return Dropdown::showFromArray($name, $values, $options);
    }
    
    //----------------- Install & uninstall -------------------//
