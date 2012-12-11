@@ -66,8 +66,8 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<form name='form' id='purgelogs_form' method='post' action='".$this->getFormURL()."'>";
       echo "<div class='center'>";
       echo "<table class='tab_cadre_fixe'>";
-      echo "<tr align='center'><th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
-      echo "<tr align='center'><th colspan='4'><i>".$LANG['plugin_purgelogs'][20]."</i>";
+      echo "<tr class='tab_bg_1'><<th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'><i>".$LANG['plugin_purgelogs'][20]."</i>";
       echo $JS = <<<JAVASCRIPT
          <script type='text/javascript'>
             function form_init_all(form, index) {
@@ -86,8 +86,8 @@ JAVASCRIPT;
       echo "</th></tr>";
       echo "<input type='hidden' name='id' value='1'>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['help'][30]."</th></tr>";
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][17]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['help'][30]."</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][17]."</td><td>";
       self::showInterval('purge_addrelation', $this->fields["purge_addrelation"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][18]."</td><td>";
@@ -95,7 +95,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><td>".$LANG['log'][20]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['log'][20]."</td><td>";
       self::showInterval('purge_createitem', $this->fields["purge_createitem"]);
       echo "</td>";
       echo "<td>".$LANG['log'][100]."</td><td>";
@@ -103,7 +103,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><td>".$LANG['log'][23]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['log'][23]."</td><td>";
       self::showInterval('purge_restoreitem', $this->fields["purge_restoreitem"]);
       echo "</td>";
 
@@ -112,7 +112,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><td>".$LANG['common'][25]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['common'][25]."</td><td>";
       self::showInterval('purge_comments', $this->fields["purge_comments"]);
       echo "</td>";
       echo "<td>".$LANG['common'][26]."</td><td>";
@@ -120,8 +120,8 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['Menu'][4]."</th></tr>";
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][1]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][4]."</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][1]."</td><td>";
       self::showInterval('purge_computer_software_install',
                           $this->fields["purge_computer_software_install"]);
       echo "</td>";
@@ -131,15 +131,15 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr align='center'><th colspan='4'>".$LANG['Menu'][24]."</th></tr>";
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][5]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][24]."</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][5]."</td><td>";
       self::showInterval('purge_infocom_creation', $this->fields["purge_infocom_creation"]);
       echo "</td>";
-      echo "</tr>";
+      echo "<td colspan='2'></td></tr>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['Menu'][14]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][14]."</th></tr>";
       
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][3]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][3]."</td><td>";
       self::showInterval('purge_profile_user', $this->fields["purge_profile_user"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][4]."</td><td>";
@@ -147,14 +147,14 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><td>".$LANG['ldap'][48]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['ldap'][48]."</td><td>";
       self::showInterval('purge_userdeletedfromldap', $this->fields["purge_userdeletedfromldap"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['ocsconfig'][0]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['ocsconfig'][0]."</th></tr>";
       
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][8]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][8]."</td><td>";
       self::showInterval('purge_ocsid_changes', $this->fields["purge_ocsid_changes"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][9]."</td><td>";
@@ -162,7 +162,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][10]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][10]."</td><td>";
       self::showInterval('purge_ocslink', $this->fields["purge_ocslink"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][11]."</td><td>";
@@ -170,9 +170,9 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['log'][18]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['log'][18]."</th></tr>";
 
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][12]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][12]."</td><td>";
       self::showInterval('purge_adddevice', $this->fields["purge_adddevice"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][13]."</td><td>";
@@ -180,7 +180,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][16]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][16]."</td><td>";
       self::showInterval('purge_disconnectdevice', $this->fields["purge_disconnectdevice"]);
       echo "</td>";
       echo "<td>".$LANG['plugin_purgelogs'][15]."</td><td>";
@@ -188,20 +188,20 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][14]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][14]."</td><td>";
       self::showInterval('purge_deletedevice', $this->fields["purge_deletedevice"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr align='center'><th colspan='4'>".$LANG['common'][29]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['common'][29]."</th></tr>";
       
-      echo "<tr align='center'><td>".$LANG['plugin_purgelogs'][7]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][7]."</td><td>";
       self::showInterval('purge_webservices_logs', $this->fields["purge_webservices_logs"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr class='tab_bg_1' align='center'>";
-      echo "<td colspan='4' align='center'>";
+      echo "<tr class='tab_bg_1'>";
+      echo "<td colspan='4' class='center'>";
       echo "<input type='submit' name='update' value=\"".$LANG['buttons'][7]."\" class='submit' >";
       echo"</td>";
       echo "</tr>";
