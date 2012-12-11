@@ -70,18 +70,18 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<tr align='center'><th colspan='4'>";
       echo $JS = <<<JAVASCRIPT
          <script type='text/javascript'>
-            function form_init_all(form, val) {
+            function form_init_all(form, index) {
                var elem = document.getElementById('purgelogs_form').elements;
                for(var i = 0; i < elem.length; i++) {
                   if (elem[i].type == "select-one") {
-                     elem[i].selectedIndex = val;
+                     elem[i].selectedIndex = index;
                   }
                }
             }
          </script>
 JAVASCRIPT;
       self::showInterval('init_all', 0, array(
-         'on_change' => "form_init_all(this.form, this.value);"
+         'on_change' => "form_init_all(this.form, this.selectedIndex);"
       ));
       echo "</th></tr>";
       echo "<input type='hidden' name='id' value='1'>";
