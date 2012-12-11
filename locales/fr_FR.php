@@ -47,3 +47,4 @@ $LANG['plugin_purgelogs'][16] = "Déconnexion d'un composant";
 $LANG['plugin_purgelogs'][17] = "Ajout relation entre objets";
 $LANG['plugin_purgelogs'][18] = "Suppression relation entre objets";
 $LANG['plugin_purgelogs'][19] = "Configuration de la purge des logs";
+$LANG['plugin_purgelogs'][20] = "Changer tous";
