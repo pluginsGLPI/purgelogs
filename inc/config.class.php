@@ -66,7 +66,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<form name='form' id='purgelogs_form' method='post' action='".$this->getFormURL()."'>";
       echo "<div class='center'>";
       echo "<table class='tab_cadre_fixe'>";
-      echo "<tr class='tab_bg_1'><<th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
       echo "<tr class='tab_bg_1'><th colspan='4'><i>".$LANG['plugin_purgelogs'][20]."</i>";
       echo $JS = <<<JAVASCRIPT
          <script type='text/javascript'>
