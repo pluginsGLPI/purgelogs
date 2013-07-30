@@ -27,8 +27,7 @@
  @link      http://www.glpi-project.org/
  @since     2009
  ---------------------------------------------------------------------- */
-define('GLPI_ROOT', '../../..');
-include (GLPI_ROOT . "/inc/includes.php");
+include ("../../../inc/includes.php");
 
 Session::checkRight("config", "w");
 
@@ -38,6 +37,6 @@ if (isset($_POST["update"])) {
    Html::back();
 }
 
-Html::header($LANG['plugin_purgelogs']['title'][1], $_SERVER['PHP_SELF'], "plugins", "config");
+Html::header(__("Purge history", "purgelogs"), $_SERVER['PHP_SELF'], "plugins", "config");
 $config->showForm();
 Html::footer();
