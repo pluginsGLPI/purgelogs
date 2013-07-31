@@ -58,9 +58,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
    }
 
    static function cronInfo($name) {
-      global $LANG;
-   
-      return array('description' => $LANG['plugin_purgelogs']['title'][1]);
+      return array('description' => __("Purge history", "purgelogs"));
    }
     
    static function purgeSoftware($config) {

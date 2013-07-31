@@ -30,7 +30,7 @@
 
 // Init the hooks of the plugins -Needed
 function plugin_init_purgelogs() {
-   global $PLUGIN_HOOKS,$CFG_GLPI,$LANG;
+   global $PLUGIN_HOOKS,$CFG_GLPI;
    $PLUGIN_HOOKS['csrf_compliant']['purgelogs'] = true;
    
    $plugin = new Plugin();
@@ -45,19 +45,17 @@ function plugin_init_purgelogs() {
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_purgelogs() {
-   global $LANG;
-
-   return array ('name'           => $LANG['plugin_purgelogs']['title'][1],
-                   'version'        => '0.83',
-                   'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
-                   'homepage'       => 'https://forge.indepnet.net/projects/show/purgelogs',
-                   'minGlpiVersion' => '0.83.3');
+   return array ('name'           => __("Purge history", "purgelogs"),
+                 'version'        => '0.84',
+                 'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
+                 'homepage'       => 'https://forge.indepnet.net/projects/show/purgelogs',
+                 'minGlpiVersion' => '0.83.3');
 }
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_purgelogs_check_prerequisites() {
-   if (version_compare(GLPI_VERSION,'0.83.3','lt') || version_compare(GLPI_VERSION,'0.84','ge')) {
-      echo "This plugin requires GLPI >= 0.83.3 and GLPI < 0.84";
+   if (version_compare(GLPI_VERSION,'0.84','lt') || version_compare(GLPI_VERSION,'0.85','ge')) {
+      echo "This plugin requires GLPI >= 0.84 and GLPI < 0.85";
       return false;
    }
    return true;

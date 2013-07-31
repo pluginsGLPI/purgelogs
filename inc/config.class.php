@@ -16,7 +16,7 @@
  GNU General Public License for more details.
 
  You should have received a copy of the GNU General Public License
- along with GLPI; along with Behav$LANG['plugin_purgelogs']['config'][26]iors. If not, see <http://www.gnu.org/licenses/>.
+ along with GLPI; along with Behaviors. If not, see <http://www.gnu.org/licenses/>.
  --------------------------------------------------------------------------
  @package   purgelogs
  @author    the purgelogs plugin team
@@ -53,21 +53,18 @@ class PluginPurgelogsConfig extends CommonDBTM {
       }
    }
    
-   static function getTypeName() {
-      global $LANG;
-
-      return $LANG['plugin_purgelogs']['title'][1];
+   static function getTypeName($nb = 0) {
+      return __("Purge history", "purgelogs");
    }
    
    function showForm() {
-      global $LANG;
-      
       $this->getFromDB(1);
       echo "<form name='form' id='purgelogs_form' method='post' action='".$this->getFormURL()."'>";
       echo "<div class='center'>";
       echo "<table class='tab_cadre_fixe'>";
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['plugin_purgelogs'][19]."</th></tr>";
-      echo "<tr class='tab_bg_1'><th colspan='4'><i>".$LANG['plugin_purgelogs'][20]."</i>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("Logs purge configuration", "purgelogs").
+           "</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'><i>".__("Change all", "purgelogs")."</i>";
       echo $JS = <<<JAVASCRIPT
          <script type='text/javascript'>
             function form_init_all(form, index) {
@@ -86,125 +83,134 @@ JAVASCRIPT;
       echo "</th></tr>";
       echo "<input type='hidden' name='id' value='1'>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['help'][30]."</th></tr>";
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][17]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("General")."</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Add relation between items", "purgelogs").
+           "</td><td>";
       self::showInterval('purge_addrelation', $this->fields["purge_addrelation"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][18]."</td><td>";
+      echo "<td>".__("Logs purge configuration", "purgelogs")."</td><td>";
       self::showInterval('purge_deleterelation', $this->fields["purge_deleterelation"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['log'][20]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("add the item")."</td><td>";
       self::showInterval('purge_createitem', $this->fields["purge_createitem"]);
       echo "</td>";
-      echo "<td>".$LANG['log'][100]."</td><td>";
+      echo "<td>".__("Delete the item")."</td><td>";
       self::showInterval('purge_deleteitem', $this->fields["purge_deleteitem"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['log'][23]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Restore the item")."</td><td>";
       self::showInterval('purge_restoreitem', $this->fields["purge_restoreitem"]);
       echo "</td>";
 
-      echo "<td>".$LANG['log'][99]."</td><td>";
+      echo "<td>".__('Update the item')."</td><td>";
       self::showInterval('purge_updateitem', $this->fields["purge_updateitem"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['common'][25]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Comments")."</td><td>";
       self::showInterval('purge_comments', $this->fields["purge_comments"]);
       echo "</td>";
-      echo "<td>".$LANG['common'][26]."</td><td>";
+      echo "<td>".__("Last update")."</td><td>";
       self::showInterval('purge_datemod', $this->fields["purge_datemod"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][4]."</th></tr>";
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][1]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>"._n('Software', 'Software', 2)."</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Installation/uninstallation of software on computers", "purgelogs")."</td><td>";
       self::showInterval('purge_computer_software_install',
                           $this->fields["purge_computer_software_install"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][2]."</td><td>";
+      echo "<td>".__("Installation/uninstallation versions on softwares", "purgelogs")."</td><td>";
       self::showInterval('purge_software_version_install',
                          $this->fields["purge_software_version_install"]);
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][24]."</th></tr>";
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][5]."</td><td>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__('Financial and administrative information').
+           "</th></tr>";
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Add financial information to an item", "purgelogs")."</td><td>";
       self::showInterval('purge_infocom_creation', $this->fields["purge_infocom_creation"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['Menu'][14]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>"._n('User','Users',2)."</th></tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][3]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Add/remove profiles to users", "purgelogs")."</td><td>";
       self::showInterval('purge_profile_user', $this->fields["purge_profile_user"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][4]."</td><td>";
+      echo "<td>".__("Add/remove groups to users", "purgelogs")."</td><td>";
       self::showInterval('purge_group_user', $this->fields["purge_group_user"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['ldap'][48]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Deleted user in LDAP directory").
+           "</td><td>";
       self::showInterval('purge_userdeletedfromldap', $this->fields["purge_userdeletedfromldap"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['ocsconfig'][0]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("OCSNG", "purgelogs")."</th></tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][8]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("OCS ID Change", "purgelogs")."</td><td>";
       self::showInterval('purge_ocsid_changes', $this->fields["purge_ocsid_changes"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][9]."</td><td>";
+      echo "<td>".__("Add from OCS", "purgelogs")."</td><td>";
       self::showInterval('purge_ocsimport', $this->fields["purge_ocsimport"]);
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][10]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Link with OCS", "purgelogs")."</td><td>";
       self::showInterval('purge_ocslink', $this->fields["purge_ocslink"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][11]."</td><td>";
+      echo "<td>".__("Delete from OCS", "purgelogs")."</td><td>";
       self::showInterval('purge_ocsdelete', $this->fields["purge_ocsdelete"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['log'][18]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>"._n('Component', 'Components', 2)."</th></tr>";
 
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][12]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Add component", "purgelogs")."</td><td>";
       self::showInterval('purge_adddevice', $this->fields["purge_adddevice"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][13]."</td><td>";
+      echo "<td>".__("Update component", "purgelogs")."</td><td>";
       self::showInterval('purge_updatedevice', $this->fields["purge_updatedevice"]);
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][16]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Disconnect a component", "purgelogs").
+           "</td><td>";
       self::showInterval('purge_disconnectdevice', $this->fields["purge_disconnectdevice"]);
       echo "</td>";
-      echo "<td>".$LANG['plugin_purgelogs'][15]."</td><td>";
+      echo "<td>".__("Connect a component", "purgelogs")."</td><td>";
       self::showInterval('purge_connectdevice', $this->fields["purge_connectdevice"]);
       echo "</td>";
       echo "</tr>";
 
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][14]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Delete component", "purgelogs").
+           "</td><td>";
       self::showInterval('purge_deletedevice', $this->fields["purge_deletedevice"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
       
-      echo "<tr class='tab_bg_1'><th colspan='4'>".$LANG['common'][29]."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("Plugins")."</th></tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".$LANG['plugin_purgelogs'][7]."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Logs Webservices connections", "purgelogs")."</td><td>";
       self::showInterval('purge_webservices_logs', $this->fields["purge_webservices_logs"]);
       echo "</td>";
-      echo "<td class='center'>".$LANG['plugin_purgelogs'][21]."</td><td>";
+      echo "<td class='center'>".__("Old Genericobject item types", "purgelogs")."</td><td>";
       self::showInterval('purge_genericobject_unusedtypes', $this->fields["purge_genericobject_unusedtypes"]);
       echo "</td></tr>";
       
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='4' class='center'>";
-      echo "<input type='submit' name='update' value=\"".$LANG['buttons'][7]."\" class='submit' >";
+      echo "<input type='submit' name='update' value=\""._sx('button','Save')."\" class='submit' >";
       echo"</td>";
       echo "</tr>";
       
@@ -213,11 +219,10 @@ JAVASCRIPT;
    }
    
    static function showInterval($name, $value, $options=array()) {
-      global $LANG;
-      $values[-1] = $LANG['common'][66];
-      $values[0]  = $LANG['setup'][307];
+      $values[-1] = __("All");
+      $values[0]  = __("Never");
       for ($i = 1; $i < 121; $i++) {
-         $values[$i] = $i. " ".$LANG['calendar'][14];
+         $values[$i] = $i. " "._n('month', 'months', 1);
       }
       $options['value'] = $value;
       return Dropdown::showFromArray($name, $values, $options);
