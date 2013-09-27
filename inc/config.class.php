@@ -93,7 +93,7 @@ JAVASCRIPT;
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".__("add the item")."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Add the item")."</td><td>";
       self::showInterval('purge_createitem', $this->fields["purge_createitem"]);
       echo "</td>";
       echo "<td>".__("Delete the item")."</td><td>";
