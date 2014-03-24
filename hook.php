@@ -31,7 +31,7 @@
 function plugin_purgelogs_install() {
    include (GLPI_ROOT."/plugins/purgelogs/inc/config.class.php");
    include (GLPI_ROOT."/plugins/purgelogs/inc/purge.class.php");
-   $migration = new Migration("0.80");
+   $migration = new Migration("0.85");
    PluginPurgelogsConfig::install($migration);
    PluginPurgelogsPurge::install($migration);
    return true;

@@ -34,6 +34,7 @@ if (!defined('GLPI_ROOT')){
 
 class PluginPurgelogsConfig extends CommonDBTM {
 
+   static $rightname = "config";
    
    static function getConfig($update = false) {
       static $config = null;
@@ -65,18 +66,15 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("Logs purge configuration", "purgelogs").
            "</th></tr>";
       echo "<tr class='tab_bg_1'><th colspan='4'><i>".__("Change all", "purgelogs")."</i>";
-      echo $JS = <<<JAVASCRIPT
-         <script type='text/javascript'>
-            function form_init_all(form, index) {
+      $js = "function form_init_all(form, index) {
                var elem = document.getElementById('purgelogs_form').elements;
                for(var i = 0; i < elem.length; i++) {
-                  if (elem[i].type == "select-one") {
+                  if (elem[i].type == \"select-one\") {
                      elem[i].selectedIndex = index;
                   }
                }
-            }
-         </script>
-JAVASCRIPT;
+            }";
+      echo Html::scriptBlock($js);
       self::showInterval('init_all', 0, array(
          'on_change' => "form_init_all(this.form, this.selectedIndex);"
       ));

@@ -37,7 +37,7 @@ function plugin_init_purgelogs() {
    if ($plugin->isInstalled('purgelogs') && $plugin->isActivated('purgelogs')) {
        
       //if glpi is loaded
-      if (Session::getLoginUserID() && Session::haveRight("config", "w")) {
+      if (Session::getLoginUserID() && Session::haveRight("config", UPDATE)) {
          $PLUGIN_HOOKS['config_page']['purgelogs'] = 'front/config.form.php';
       }
    }
@@ -46,16 +46,16 @@ function plugin_init_purgelogs() {
 // Get the name and the version of the plugin - Needed
 function plugin_version_purgelogs() {
    return array ('name'           => __("Purge history", "purgelogs"),
-                 'version'        => '0.84',
+                 'version'        => '0.85',
                  'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
                  'homepage'       => 'https://forge.indepnet.net/projects/show/purgelogs',
-                 'minGlpiVersion' => '0.83.3');
+                 'minGlpiVersion' => '0.85');
 }
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_purgelogs_check_prerequisites() {
-   if (version_compare(GLPI_VERSION,'0.84','lt') || version_compare(GLPI_VERSION,'0.85','ge')) {
-      echo "This plugin requires GLPI >= 0.84 and GLPI < 0.85";
+   if (version_compare(GLPI_VERSION,'0.85','lt') || version_compare(GLPI_VERSION,'0.86','ge')) {
+      echo "This plugin requires GLPI >= 0.85 and GLPI < 0.86";
       return false;
    }
    return true;

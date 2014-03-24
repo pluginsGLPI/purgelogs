@@ -29,7 +29,7 @@
  ---------------------------------------------------------------------- */
 include ("../../../inc/includes.php");
 
-Session::checkRight("config", "w");
+Session::checkRight("config", UPDATE);
 
 $config = new PluginPurgelogsConfig();
 if (isset($_POST["update"])) {
