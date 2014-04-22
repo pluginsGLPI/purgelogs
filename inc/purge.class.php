@@ -49,6 +49,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
          self::purgeItems($config);
          self::purgeOthers($config);
          self::purgeGenericobject($config);
+         self::purgeAll($config);
          $logs_after = self::getLogsCount();
          $task->addVolume($logs_before - $logs_after);
       } else {
@@ -235,6 +236,16 @@ class PluginPurgelogsPurge extends CommonDBTM {
             $DB->query($query);
          }
       }
+   }
+
+   static function purgeAll($config) {
+      global $DB;
+      $month = self::getDateModRestriction($config->fields['purge_all']);
+         if ($month) {
+            $query = "DELETE FROM `glpi_logs`
+            WHERE 1 $month";
+            $DB->query($query);
+         }
    }
    
    static function getDateModRestriction($month) {

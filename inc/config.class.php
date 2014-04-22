@@ -207,6 +207,13 @@ JAVASCRIPT;
       echo "<td class='center'>".__("Old Genericobject item types", "purgelogs")."</td><td>";
       self::showInterval('purge_genericobject_unusedtypes', $this->fields["purge_genericobject_unusedtypes"]);
       echo "</td></tr>";
+
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("All sections","purgelogs")."</th></tr>";
+
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Purge all log entries","purgelogs")."</td><td>";
+      self::showInterval('purge_all', $this->fields["purge_all"]);
+      echo "</td>";
+      echo "<td colspan='2'></td></tr>";
       
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='4' class='center'>";
@@ -275,6 +282,20 @@ JAVASCRIPT;
                //Add config
                $config->add(array('id' => 1));
       }
+      
+      // for 0.84.1 - purge_all option
+      if(TableExists($table) && !FieldExists($table, "purge_all")) {
+
+         $migration->displayMessage("Updating $table");
+
+         $migration->addField($table, "purge_all", "tinyint(1) NOT NULL default '0'",
+                              array('after'     => "purge_genericobject_unusedtypes",
+                                    'update'    => "0"));
+      }
+
+      $migration->executeMigration();
+
+      return true;
    }
    
    static function uninstall() {
