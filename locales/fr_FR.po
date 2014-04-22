@@ -33,6 +33,14 @@ msgstr "Changer tous"
 msgid "Add relation between items"
 msgstr "Ajout relation entre objets"
 
+#: inc/config.class.php:211
+msgid "All sections"
+msgstr "Toutes rubriques confondues"
+
+#: inc/config.class.php:213
+msgid "Purge all log entries"
+msgstr "Toutes les lignes de la table de log"
+
 #: inc/config.class.php:123
 msgid "Installation/uninstallation of software on computers"
 msgstr "Installation/désinstallation des logiciels sur les postes"
