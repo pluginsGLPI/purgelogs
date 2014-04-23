@@ -242,7 +242,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       $table = getTableForItemType(__CLASS__);
       $config = new self();
 
-      //This class is available since version 1.3.0
+      // Install
       if (!TableExists($table)) {
             $migration->displayMessage("Installing $table");
 
@@ -274,6 +274,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
                      `purge_comments` tinyint(1) NOT NULL default '0',
                      `purge_datemod` tinyint(1) NOT NULL default '0',
                      `purge_genericobject_unusedtypes` tinyint(1) NOT NULL default '0',
+                     `purge_all` tinyint(1) NOT NULL default '0',
                      PRIMARY KEY  (`id`)
                   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
                $DB->query($query) or die ($DB->error());
@@ -281,14 +282,29 @@ class PluginPurgelogsConfig extends CommonDBTM {
                $config->add(array('id' => 1));
       }
 
-      // for 0.84.1 - purge_all option
-      if(TableExists($table) && !FieldExists($table, "purge_all")) {
+      // Update
+      if(TableExists($table) ) {
 
-         $migration->displayMessage("Updating $table");
+         // for 0.84
+         if(!FieldExists($table, "purge_genericobject_unusedtypes")) {
 
-         $migration->addField($table, "purge_all", "tinyint(1) NOT NULL default '0'",
-                              array('after'     => "purge_genericobject_unusedtypes",
-                                    'update'    => "0"));
+            $migration->displayMessage("Updating $table adding field purge_genericobject_unusedtypes");
+
+            $migration->addField($table, "purge_genericobject_unusedtypes", 
+                                 "tinyint(1) NOT NULL default '0'",
+                                 array('after'     => "purge_datemod",
+                                       'update'    => "0"));
+         }
+
+         // for 0.84.1
+         if(!FieldExists($table, "purge_all")) {
+
+            $migration->displayMessage("Updating $table adding fiel purge_all");
+
+            $migration->addField($table, "purge_all", "tinyint(1) NOT NULL default '0'",
+                                 array('after'     => "purge_genericobject_unusedtypes",
+                                       'update'    => "0"));
+         }
       }
 
       $migration->executeMigration();
