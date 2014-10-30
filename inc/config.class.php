@@ -147,11 +147,15 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "</td>";
       echo "</tr>";
       
-      echo "<tr class='tab_bg_1'><td class='center'>".__("Deleted user in LDAP directory").
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("User authentication method changes", "purgelogs")."</td><td>";
+      self::showInterval('purge_user_auth_changes', $this->fields["purge_user_auth_changes"]);
+      echo "</td>";
+      echo "<td class='center'>".__("Deleted user in LDAP directory").
            "</td><td>";
       self::showInterval('purge_userdeletedfromldap', $this->fields["purge_userdeletedfromldap"]);
       echo "</td>";
-      echo "<td colspan='2'></td></tr>";
+      echo "</tr>";
       
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("OCSNG", "purgelogs")."</th></tr>";
       
@@ -275,6 +279,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
                      `purge_datemod` tinyint(1) NOT NULL default '0',
                      `purge_genericobject_unusedtypes` tinyint(1) NOT NULL default '0',
                      `purge_all` tinyint(1) NOT NULL default '0',
+                     `purge_user_auth_changes` tinyint(1) NOT NULL default '0',
                      PRIMARY KEY  (`id`)
                   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
                $DB->query($query) or die ($DB->error());
@@ -305,6 +310,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
                                  array('after'     => "purge_genericobject_unusedtypes",
                                        'update'    => "0"));
          }
+         $migration->addfield($table, 'purge_user_auth_changes', 'bool');
       }
 
       $migration->executeMigration();
