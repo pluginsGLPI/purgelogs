@@ -130,6 +130,14 @@ class PluginPurgelogsPurge extends CommonDBTM {
          $DB->query($query);
       }
       
+      $month = self::getDateModRestriction($config->fields['purge_user_auth_changes']);
+      if ($month) {
+         //Delete software version association
+         $query = "DELETE FROM `glpi_logs`
+                   WHERE `itemtype`='User' AND `linked_action` IN (15) $month";
+         $DB->query($query);
+      }
+
    }
 
    static function purgeWebserviceslogs($config) {

@@ -108,3 +108,8 @@ msgstr "Logs Webservices connections"
 #: inc/config.class.php:207
 msgid "Old Genericobject item types"
 msgstr "Old Genericobject item types"
+
+#: inc/config.class.php:153
+msgid "User authentication method changes"
+msgstr "User authentication type changes"
+
