@@ -3,7 +3,7 @@
    <name>Historical purge</name>
    <key>purgelogs</key>
    <state>stable</state>
-   <logo>https://raw.githubusercontent.com/teclib/purgelogs/master/purgelogs.png</logo>
+   <logo>https://raw.githubusercontent.com/pluginsGLPI/purgelogs/master/purgelogs.png</logo>
    <description>
       <short>
          <fr><![CDATA[Purge de l'historique]]></fr>
@@ -14,10 +14,10 @@
          <en><![CDATA[This plugin enables historical purge]]></en>
       </long>
    </description>
-   <homepage>https://github.com/purgelogs/purgelogs</homepage>
-   <download>https://github.com/purgelogs/purgelogs/releases</download>
-   <issues>https://github.com/purgelogs/purgelogs/issues</issues>
-   <readme>https://raw.githubusercontent.com/purgelogs/purgelogs/master/README.md</readme>
+   <homepage>https://github.com/pluginsGLPI/purgelogs</homepage>
+   <download>https://github.com/pluginsGLPI/purgelogs/releases</download>
+   <issues>https://github.com/pluginsGLPI/purgelogs/issues</issues>
+   <readme>https://raw.githubusercontent.com/pluginsGLPI/purgelogs/master/README.md</readme>
    <authors>
       <author>Walid Nouh</author>
    </authors>
