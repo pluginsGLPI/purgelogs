@@ -33,12 +33,12 @@ if (!defined('GLPI_ROOT')){
 }
 
 class PluginPurgelogsPurge extends CommonDBTM {
-   
+
    static function cronPurgeLogs($task) {
       $config = new PluginPurgelogsConfig();
       $config->getFromDB(1);
       $logs_before = self::getLogsCount();
-      if ($logs_before) {
+      if (self::canLaunchPurge() && $logs_before) {
          self::purgeSoftware($config);
          self::purgeInfocom($config);
          self::purgeUserInfos($config);
@@ -61,7 +61,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
    static function cronInfo($name) {
       return array('description' => __("Purge history", "purgelogs"));
    }
-    
+
    static function purgeSoftware($config) {
       global $DB;
       $month = self::getDateModRestriction($config->fields['purge_computer_software_install']);
@@ -70,7 +70,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
                    WHERE `linked_action` IN (4,5) $month";
          $DB->query($query);
       }
-      
+
       $month = self::getDateModRestriction($config->fields['purge_software_version_install']);
       if ($month) {
          //Delete software version association
@@ -81,10 +81,10 @@ class PluginPurgelogsPurge extends CommonDBTM {
          $DB->query($query);
       }
    }
-   
+
    static function purgeInfocom($config) {
       global $DB;
-      
+
       $month = self::getDateModRestriction($config->fields['purge_infocom_creation']);
       if ($month) {
          //Delete software version association
@@ -96,7 +96,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
          $DB->query($query);
       }
    }
-   
+
    static function purgeUserinfos($config) {
       global $DB;
 
@@ -110,7 +110,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
                             AND `linked_action` IN (17, 18, 19)";
          $DB->query($query);
       }
-      
+
       $month = self::getDateModRestriction($config->fields['purge_group_user']);
       if ($month) {
          //Delete software version association
@@ -121,7 +121,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
                             AND `linked_action` IN (17, 18, 19)";
          $DB->query($query);
       }
-      
+
       $month = self::getDateModRestriction($config->fields['purge_userdeletedfromldap']);
       if ($month) {
          //Delete software version association
@@ -129,7 +129,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
                    WHERE `itemtype`='User' AND `linked_action` IN (12) $month";
          $DB->query($query);
       }
-      
+
       $month = self::getDateModRestriction($config->fields['purge_user_auth_changes']);
       if ($month) {
          //Delete software version association
@@ -150,7 +150,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
          $DB->query($query);
       }
    }
-   
+
    static function purgeOcsInfos($config) {
       global $DB;
       foreach (array(10 => 'ocsid_changes', 8 => 'ocsimport', 9 => 'ocsdelete',
@@ -164,7 +164,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
          }
       }
    }
-   
+
    static function purgeDevices($config) {
       global $DB;
       foreach (array(1 => "adddevice", 2 => "updatedevice", 3 => "deletedevice",
@@ -176,13 +176,13 @@ class PluginPurgelogsPurge extends CommonDBTM {
                       WHERE `linked_action`='$key' $month";
             $DB->query($query);
          }
-          
+
       }
    }
 
    static function purgeRelations($config) {
       global $DB;
-      
+
       foreach (array(15 => "addrelation", 16 => "deleterelation") as $key => $value) {
          $month = self::getDateModRestriction($config->fields['purge_'.$value]);
          if ($month) {
@@ -193,10 +193,10 @@ class PluginPurgelogsPurge extends CommonDBTM {
          }
       }
    }
-   
+
    static function purgeItems($config) {
       global $DB;
-      
+
       foreach (array(20 => "createitem", 17 => "createitem",
                        13 => "deleteitem", 19 => "deleteitem",
                        18 => "updateitem", 14 => "restoreitem") as $key => $value) {
@@ -208,9 +208,9 @@ class PluginPurgelogsPurge extends CommonDBTM {
             $DB->query($query);
          }
       }
-      
+
    }
-   
+
    static function purgeOthers($config) {
       global $DB;
       foreach (array(16 => 'comments', 19 => 'datemod') as $key => $value) {
@@ -220,7 +220,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
             WHERE `id_search_option`='$key' $month";
             $DB->query($query);
          }
-          
+
       }
    }
 
@@ -255,7 +255,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
             $DB->query($query);
          }
    }
-   
+
    static function getDateModRestriction($month) {
       if ($month > 0) {
          return "AND `date_mod` <= DATE_ADD(NOW(), INTERVAL -$month MONTH) ";
@@ -266,9 +266,31 @@ class PluginPurgelogsPurge extends CommonDBTM {
       }
    }
 
+   /**
+   * since GLPi 0.90.2
+   * Check if there's no crashed tables. If there're some, skip log purge
+   */
+   static function canLaunchPurge() {
+         if (method_exists('DBmysql', 'checkForCrashedTables')) {
+
+            //Check for potential crashed tables
+            if (empty(DBmysql::checkForCrashedTables())) {
+               //No crashed tables, good !
+               return true;
+            } else {
+               //Some crashed tables has been detected : stop cron execution
+               Toolbox::logDebug("Cannot launch automatic action : crashed tables detected");
+               return false;
+            }
+         } else {
+            //The check function is unavailable (GLPi < 0.90.2)
+            return true;
+         }
+   }
+
    static function getLogsCount() {
       global $DB;
-      
+
       $query = "SELECT count(id) as cpt FROM `glpi_logs`";
       $result = $DB->query($query);
       return $DB->result($result, 0, "cpt");
@@ -282,7 +304,7 @@ class PluginPurgelogsPurge extends CommonDBTM {
                             array('param' => 24, 'mode' => CronTask::MODE_EXTERNAL));
       }
    }
-   
+
    static function uninstall() {
       CronTask::Unregister(__CLASS__);
    }
