@@ -86,7 +86,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
            "</td><td>";
       self::showInterval('purge_addrelation', $this->fields["purge_addrelation"]);
       echo "</td>";
-      echo "<td>".__("Logs purge configuration", "purgelogs")."</td><td>";
+      echo "<td>".__("Delete relation between items", "purgelogs")."</td><td>";
       self::showInterval('purge_deleterelation', $this->fields["purge_deleterelation"]);
       echo "</td>";
       echo "</tr>";
