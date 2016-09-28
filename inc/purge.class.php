@@ -274,7 +274,8 @@ class PluginPurgelogsPurge extends CommonDBTM {
          if (method_exists('DBmysql', 'checkForCrashedTables')) {
 
             //Check for potential crashed tables
-            if (empty(DBmysql::checkForCrashedTables())) {
+            $crashed_tables = DBmysql::checkForCrashedTables();
+            if (empty($crashed_tables)) {
                //No crashed tables, good !
                return true;
             } else {
