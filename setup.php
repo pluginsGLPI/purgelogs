@@ -46,9 +46,9 @@ function plugin_init_purgelogs() {
 // Get the name and the version of the plugin - Needed
 function plugin_version_purgelogs() {
    return array ('name'           => __("Purge history", "purgelogs"),
-                 'version'        => '0.85+1.2',
+                 'version'        => '1.2.1',
                  'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
-                 'homepage'       => 'https://forge.indepnet.net/projects/show/purgelogs',
+                 'homepage'       => 'https://github.com/pluginsGLPI/purgelogs',
                  'minGlpiVersion' => '0.85');
 }
 
