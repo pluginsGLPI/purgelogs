@@ -28,6 +28,8 @@
  @since     2009
  ---------------------------------------------------------------------- */
 
+define ('PLUGIN_PURGELOGS_VERSION', '1.2.2');
+
 // Init the hooks of the plugins -Needed
 function plugin_init_purgelogs() {
    global $PLUGIN_HOOKS,$CFG_GLPI;
@@ -46,7 +48,7 @@ function plugin_init_purgelogs() {
 // Get the name and the version of the plugin - Needed
 function plugin_version_purgelogs() {
    return array ('name'           => __("Purge history", "purgelogs"),
-                 'version'        => '1.2.1',
+                 'version'        => PLUGIN_PURGELOGS_VERSION,
                  'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
                  'homepage'       => 'https://github.com/pluginsGLPI/purgelogs',
                  'minGlpiVersion' => '0.85');
