@@ -35,7 +35,7 @@ if (!defined('GLPI_ROOT')){
 class PluginPurgelogsConfig extends CommonDBTM {
 
    static $rightname = "config";
-   
+
    static function getConfig($update = false) {
       static $config = null;
 
@@ -53,11 +53,11 @@ class PluginPurgelogsConfig extends CommonDBTM {
          $this->getFromDB(1);
       }
    }
-   
+
    static function getTypeName($nb = 0) {
       return __("Purge history", "purgelogs");
    }
-   
+
    function showForm() {
       $this->getFromDB(1);
       echo "<form name='form' id='purgelogs_form' method='post' action='".$this->getFormURL()."'>";
@@ -80,7 +80,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       ));
       echo "</th></tr>";
       echo "<input type='hidden' name='id' value='1'>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("General")."</th></tr>";
       echo "<tr class='tab_bg_1'><td class='center'>".__("Add relation between items", "purgelogs").
            "</td><td>";
@@ -90,7 +90,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_deleterelation', $this->fields["purge_deleterelation"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".__("Add the item")."</td><td>";
       self::showInterval('purge_createitem', $this->fields["purge_createitem"]);
       echo "</td>";
@@ -98,7 +98,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_deleteitem', $this->fields["purge_deleteitem"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".__("Restore the item")."</td><td>";
       self::showInterval('purge_restoreitem', $this->fields["purge_restoreitem"]);
       echo "</td>";
@@ -107,7 +107,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_updateitem', $this->fields["purge_updateitem"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".__("Comments")."</td><td>";
       self::showInterval('purge_comments', $this->fields["purge_comments"]);
       echo "</td>";
@@ -115,7 +115,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_datemod', $this->fields["purge_datemod"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>"._n('Software', 'Software', 2)."</th></tr>";
       echo "<tr class='tab_bg_1'><td class='center'>".
            __("Installation/uninstallation of software on computers", "purgelogs")."</td><td>";
@@ -135,9 +135,9 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_infocom_creation', $this->fields["purge_infocom_creation"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>"._n('User','Users',2)."</th></tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".
            __("Add/remove profiles to users", "purgelogs")."</td><td>";
       self::showInterval('purge_profile_user', $this->fields["purge_profile_user"]);
@@ -146,7 +146,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_group_user', $this->fields["purge_group_user"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".
            __("User authentication method changes", "purgelogs")."</td><td>";
       self::showInterval('purge_user_auth_changes', $this->fields["purge_user_auth_changes"]);
@@ -156,9 +156,9 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_userdeletedfromldap', $this->fields["purge_userdeletedfromldap"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("OCSNG", "purgelogs")."</th></tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".__("OCS ID Change", "purgelogs")."</td><td>";
       self::showInterval('purge_ocsid_changes', $this->fields["purge_ocsid_changes"]);
       echo "</td>";
@@ -174,7 +174,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_ocsdelete', $this->fields["purge_ocsdelete"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>"._n('Component', 'Components', 2)."</th></tr>";
 
       echo "<tr class='tab_bg_1'><td class='center'>".__("Add component", "purgelogs")."</td><td>";
@@ -184,7 +184,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_updatedevice', $this->fields["purge_updatedevice"]);
       echo "</td>";
       echo "</tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".__("Disconnect a component", "purgelogs").
            "</td><td>";
       self::showInterval('purge_disconnectdevice', $this->fields["purge_disconnectdevice"]);
@@ -199,9 +199,9 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_deletedevice', $this->fields["purge_deletedevice"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("Plugins")."</th></tr>";
-      
+
       echo "<tr class='tab_bg_1'><td class='center'>".
            __("Logs Webservices connections", "purgelogs")."</td><td>";
       self::showInterval('purge_webservices_logs', $this->fields["purge_webservices_logs"]);
@@ -209,7 +209,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<td class='center'>".__("Old Genericobject item types", "purgelogs")."</td><td>";
       self::showInterval('purge_genericobject_unusedtypes', $this->fields["purge_genericobject_unusedtypes"]);
       echo "</td></tr>";
-      
+
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("All sections","purgelogs")."</th></tr>";
 
       echo "<tr class='tab_bg_1'><td class='center'>".__("Purge all log entries","purgelogs")."</td><td>";
@@ -222,11 +222,11 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<input type='submit' name='update' value=\""._sx('button','Save')."\" class='submit' >";
       echo"</td>";
       echo "</tr>";
-      
+
       echo "</table></div>";
       Html::closeForm();
    }
-   
+
    static function showInterval($name, $value, $options=array()) {
       $values[-1] = __("All");
       $values[0]  = __("Never");
@@ -236,7 +236,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       $options['value'] = $value;
       return Dropdown::showFromArray($name, $values, $options);
    }
-   
+
    //----------------- Install & uninstall -------------------//
 
    static function install(Migration $migration) {
@@ -295,7 +295,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
 
             $migration->displayMessage("Updating $table adding field purge_genericobject_unusedtypes");
 
-            $migration->addField($table, "purge_genericobject_unusedtypes", 
+            $migration->addField($table, "purge_genericobject_unusedtypes",
                                  "tinyint(1) NOT NULL default '0'",
                                  array('after'     => "purge_datemod",
                                        'update'    => "0"));
@@ -317,7 +317,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
 
       return true;
    }
-   
+
    static function uninstall() {
       global $DB;
       //New table
