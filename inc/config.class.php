@@ -213,7 +213,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
 
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("All sections", "purgelogs")."</th></tr>";
 
-      echo "<tr class='tab_bg_1'><td class='center'>".__("Purge all log entries","purgelogs")."</td><td>";
+      echo "<tr class='tab_bg_1'><td class='center'>".__("Purge all log entries", "purgelogs")."</td><td>";
       self::showInterval('purge_all', $this->fields["purge_all"]);
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
