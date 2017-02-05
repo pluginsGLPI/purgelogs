@@ -249,19 +249,19 @@ class PluginPurgelogsPurge extends CommonDBTM {
    static function purgeAll($config) {
       global $DB;
       $month = self::getDateModRestriction($config->fields['purge_all']);
-         if ($month) {
-            $query = "DELETE FROM `glpi_logs`
-            WHERE 1 $month";
-            $DB->query($query);
-         }
+      if ($month) {
+         $query = "DELETE FROM `glpi_logs`
+                   WHERE 1 $month";
+         $DB->query($query);
+      }
    }
 
    static function getDateModRestriction($month) {
       if ($month > 0) {
          return "AND `date_mod` <= DATE_ADD(NOW(), INTERVAL -$month MONTH) ";
-      } elseif ($month == -1) {
+      } else if ($month == -1) {
          return "AND 1 ";
-      } elseif ($month == 0) {
+      } else if ($month == 0) {
          return false;
       }
    }
@@ -271,31 +271,32 @@ class PluginPurgelogsPurge extends CommonDBTM {
    * Check if there's no crashed tables. If there're some, skip log purge
    */
    static function canLaunchPurge() {
-         if (method_exists('DBmysql', 'checkForCrashedTables')) {
+      if (method_exists('DBmysql', 'checkForCrashedTables')) {
 
-            //Check for potential crashed tables
-            $crashed_tables = DBmysql::checkForCrashedTables();
-            if (empty($crashed_tables)) {
-               //No crashed tables, good !
-               return true;
-            } else {
-               //Some crashed tables has been detected : stop cron execution
-               Toolbox::logDebug("Cannot launch automatic action : crashed tables detected");
-               return false;
-            }
-         } else {
-            //The check function is unavailable (GLPi < 0.90.2)
+         //Check for potential crashed tables
+         $crashed_tables = DBmysql::checkForCrashedTables();
+         if (empty($crashed_tables)) {
+            //No crashed tables, good !
             return true;
+         } else {
+            //Some crashed tables has been detected : stop cron execution
+            Toolbox::logDebug("Cannot launch automatic action : crashed tables detected");
+            return false;
          }
+      } else {
+         //The check function is unavailable (GLPi < 0.90.2)
+         return true;
+      }
    }
 
    static function getLogsCount() {
       global $DB;
 
-      $query = "SELECT count(id) as cpt FROM `glpi_logs`";
+      $query  = "SELECT count(id) as cpt FROM `glpi_logs`";
       $result = $DB->query($query);
       return $DB->result($result, 0, "cpt");
    }
+   
    //----------------- Install & uninstall -------------------//
 
    static function install(Migration $migration) {

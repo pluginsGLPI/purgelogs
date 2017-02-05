@@ -44,4 +44,3 @@ function plugin_purgelogs_uninstall() {
    PluginPurgelogsPurge::uninstall();
    return true;
 }
-?>

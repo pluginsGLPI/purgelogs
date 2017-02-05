@@ -242,7 +242,6 @@ class PluginPurgelogsConfig extends CommonDBTM {
    static function install(Migration $migration) {
       global $DB;
 
-
       $table = getTableForItemType(__CLASS__);
       $config = new self();
 
@@ -324,5 +323,3 @@ class PluginPurgelogsConfig extends CommonDBTM {
       $DB->query("DROP TABLE IF EXISTS `".getTableForItemType(__CLASS__)."`");
    }
 }
-
-?>
