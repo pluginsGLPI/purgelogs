@@ -29,7 +29,7 @@ along with datainjection. If not, see <http://www.gnu.org/licenses/>.
  @since     2009
  ---------------------------------------------------------------------- */
 
-if (!defined('GLPI_ROOT')){
+if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
 }
 

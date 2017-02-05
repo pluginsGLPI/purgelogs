@@ -29,7 +29,7 @@ along with datainjection. If not, see <http://www.gnu.org/licenses/>.
  @since     2009
  ---------------------------------------------------------------------- */
 
-if (!defined('GLPI_ROOT')){
+if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
 }
 
@@ -137,7 +137,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "</td>";
       echo "<td colspan='2'></td></tr>";
 
-      echo "<tr class='tab_bg_1'><th colspan='4'>"._n('User','Users',2)."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>"._n('User', 'Users', 2)."</th></tr>";
 
       echo "<tr class='tab_bg_1'><td class='center'>".
            __("Add/remove profiles to users", "purgelogs")."</td><td>";
@@ -211,7 +211,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       self::showInterval('purge_genericobject_unusedtypes', $this->fields["purge_genericobject_unusedtypes"]);
       echo "</td></tr>";
 
-      echo "<tr class='tab_bg_1'><th colspan='4'>".__("All sections","purgelogs")."</th></tr>";
+      echo "<tr class='tab_bg_1'><th colspan='4'>".__("All sections", "purgelogs")."</th></tr>";
 
       echo "<tr class='tab_bg_1'><td class='center'>".__("Purge all log entries","purgelogs")."</td><td>";
       self::showInterval('purge_all', $this->fields["purge_all"]);
@@ -220,7 +220,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
 
       echo "<tr class='tab_bg_1'>";
       echo "<td colspan='4' class='center'>";
-      echo "<input type='submit' name='update' value=\""._sx('button','Save')."\" class='submit' >";
+      echo "<input type='submit' name='update' value=\""._sx('button', 'Save')."\" class='submit' >";
       echo"</td>";
       echo "</tr>";
 
@@ -288,10 +288,10 @@ class PluginPurgelogsConfig extends CommonDBTM {
       }
 
       // Update
-      if(TableExists($table) ) {
+      if (TableExists($table)) {
 
          // for 0.84
-         if(!FieldExists($table, "purge_genericobject_unusedtypes")) {
+         if (!FieldExists($table, "purge_genericobject_unusedtypes")) {
 
             $migration->displayMessage("Updating $table adding field purge_genericobject_unusedtypes");
 
@@ -302,7 +302,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
          }
 
          // for 0.84.1
-         if(!FieldExists($table, "purge_all")) {
+         if (!FieldExists($table, "purge_all")) {
 
             $migration->displayMessage("Updating $table adding fiel purge_all");
 
