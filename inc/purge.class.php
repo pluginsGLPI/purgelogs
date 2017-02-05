@@ -1,30 +1,31 @@
 <?php
 /*
- * @version $Id$
- LICENSE
+* @version $Id: HEADER 14684 2011-06-11 06:32:40Z remi $
+LICENSE
 
- This file is part of the purgelogs plugin.
+This file is part of the purgelogs plugin.
 
- purgelogs plugin is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Purgelogs plugin is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- purgelogs plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Purgelogs plugin is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with GLPI; along with purgelogs. If not, see <http://www.gnu.org/licenses/>.
- --------------------------------------------------------------------------
+You should have received a copy of the GNU General Public License
+along with datainjection. If not, see <http://www.gnu.org/licenses/>.
+--------------------------------------------------------------------------
  @package   purgelogs
- @author    the purgelogs plugin team
- @copyright Copyright (c) 2010-2011 purgelogs plugin team
+ @author    TECLIB
+ @copyright Copyright (c) 2009-2017 purgelogs plugin team
  @license   GPLv2+
             http://www.gnu.org/licenses/gpl.txt
  @link      https://forge.indepnet.net/projects/purgelogs
  @link      http://www.glpi-project.org/
+ @link      http://www.teclib-edition.com/
  @since     2009
  ---------------------------------------------------------------------- */
 
