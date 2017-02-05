@@ -290,20 +290,15 @@ class PluginPurgelogsPurge extends CommonDBTM {
    }
 
    static function getLogsCount() {
-      global $DB;
-
-      $query  = "SELECT count(id) as cpt FROM `glpi_logs`";
-      $result = $DB->query($query);
-      return $DB->result($result, 0, "cpt");
+      return countElementsInTable('glpi_logs');
    }
-   
-   //----------------- Install & uninstall -------------------//
 
+   //----------------- Install & uninstall -------------------//
    static function install(Migration $migration) {
       $cron = new CronTask;
       if (!$cron->getFromDBbyName(__CLASS__, 'purgeLogs')) {
          CronTask::Register(__CLASS__, 'purgeLogs', 7 * DAY_TIMESTAMP,
-                            array('param' => 24, 'mode' => CronTask::MODE_EXTERNAL));
+                            ['param' => 24, 'mode' => CronTask::MODE_EXTERNAL]);
       }
    }
 
