@@ -275,9 +275,9 @@ class PluginPurgelogsPurge extends CommonDBTM {
    static function getDateModRestriction($month) {
       if ($month > 0) {
          return "AND `date_mod` <= DATE_ADD(NOW(), INTERVAL -$month MONTH) ";
-      } else if ($month == -1) {
+      } else if ($month == PluginPurgelogsConfig::DELETE_ALL) {
          return "AND 1 ";
-      } else if ($month == 0) {
+      } else if ($month == PluginPurgelogsConfig::KEEP_ALL) {
          return false;
       }
    }

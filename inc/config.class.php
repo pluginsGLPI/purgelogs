@@ -36,6 +36,8 @@ if (!defined('GLPI_ROOT')) {
 class PluginPurgelogsConfig extends CommonDBTM {
 
    static $rightname = "config";
+   const DELETE_ALL = -1;
+   const KEEP_ALL = 0;
 
    static function getConfig($update = false) {
       static $config = null;
@@ -230,10 +232,13 @@ class PluginPurgelogsConfig extends CommonDBTM {
    }
 
    static function showInterval($name, $value, $options=array()) {
-      $values[-1] = __("All");
-      $values[0]  = __("Never");
+      $values[self::DELETE_ALL] = __("Delete all");
+      $values[self::KEEP_ALL]   = __("Keep all");
       for ($i = 1; $i < 121; $i++) {
-         $values[$i] = $i. " "._n('month', 'months', 1);
+         $values[$i] = sprintf(_n("Delete if older than %s month",
+                                  "Delete if older than %s months",
+                                  $i),
+                               $i);
       }
       $options = array_merge([
          'value'   => $value,
