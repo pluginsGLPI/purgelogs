@@ -66,20 +66,14 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<table class='tab_cadre_fixe'>";
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("Logs purge configuration", "purgelogs").
            "</th></tr>";
-      echo "<tr class='tab_bg_1'><th colspan='4'><i>".__("Change all", "purgelogs")."</i>";
-      $js = "function form_init_all(form, index) {
-               var elem = document.getElementById('purgelogs_form').elements;
-               for(var i = 0; i < elem.length; i++) {
-                  if (elem[i].type == \"select-one\") {
-                     elem[i].selectedIndex = index;
-                  }
-               }
-            }";
-      echo Html::scriptBlock($js);
+      echo "<tr class='tab_bg_1 center'><td colspan='4'><i>".__("Change all", "purgelogs")."</i>";
+      echo Html::scriptBlock("function form_init_all(value) {
+         $('#purgelogs_form .purgelog_interval select').select2('val', value);
+      }");
       self::showInterval('init_all', 0, array(
-         'on_change' => "form_init_all(this.form, this.selectedIndex);"
+         'on_change' => "form_init_all(this.selectedIndex);"
       ));
-      echo "</th></tr>";
+      echo "</td></tr>";
       echo "<input type='hidden' name='id' value='1'>";
 
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("General")."</th></tr>";
@@ -241,8 +235,16 @@ class PluginPurgelogsConfig extends CommonDBTM {
       for ($i = 1; $i < 121; $i++) {
          $values[$i] = $i. " "._n('month', 'months', 1);
       }
-      $options['value'] = $value;
-      return Dropdown::showFromArray($name, $values, $options);
+      $options = array_merge([
+         'value'   => $value,
+         'display' => false
+      ], $options);
+
+      $out = "<div class='purgelog_interval'>";
+      $out.= Dropdown::showFromArray($name, $values, $options);
+      $out.= "</div>";
+
+      echo $out;
    }
 
    //----------------- Install & uninstall -------------------//
