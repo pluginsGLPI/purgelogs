@@ -99,12 +99,16 @@ class PluginPurgelogsPurge extends CommonDBTM {
 
       $month = self::getDateModRestriction($config->fields['purge_infocom_creation']);
       if ($month) {
-         //Delete software version association
+         //Delete add infocom
          $query = "DELETE FROM `glpi_logs`
-                   WHERE `itemtype`='Software'
-                      AND `itemtype_link`='Infocom'
-                         $month
-                            AND `linked_action` IN (17)";
+                   WHERE (`itemtype`='Software'
+                          AND `itemtype_link`='Infocom'
+                          AND `linked_action` = 17
+
+                          OR `itemtype` = 'Infocom'
+                          AND `linked_action` = 20
+                         )
+                     $month";
          $DB->query($query);
       }
    }
