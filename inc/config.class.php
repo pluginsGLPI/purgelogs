@@ -129,6 +129,13 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "</td>";
       echo "</tr>";
 
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Add/Remove of computers on software versions", "purgelogs")."</td><td>";
+      self::showInterval('purge_software_computer_install',
+                          $this->fields["purge_software_computer_install"]);
+      echo "</td>";
+      echo "</tr>";
+
       echo "<tr class='tab_bg_1'><th colspan='4'>".__('Financial and administrative information').
            "</th></tr>";
       echo "<tr class='tab_bg_1'><td class='center'>".
@@ -254,6 +261,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
             $query = "CREATE TABLE `$table` (
                      `id` int(11) NOT NULL auto_increment,
                      `purge_computer_software_install` int(11) NOT NULL default '0',
+                     `purge_software_computer_install` int(11) NOT NULL default '0',
                      `purge_software_version_install` int(11) NOT NULL default '0',
                      `purge_infocom_creation` int(11) NOT NULL default '0',
                      `purge_profile_user` int(11) NOT NULL default '0',
@@ -284,33 +292,29 @@ class PluginPurgelogsConfig extends CommonDBTM {
                   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
                $DB->query($query) or die ($DB->error());
                //Add config
-               $config->add(array('id' => 1));
+               $config->add(['id' => 1]);
       }
 
       // Update
       if (TableExists($table)) {
+         $migration->displayMessage("Updating $table");
 
          // for 0.84
-         if (!FieldExists($table, "purge_genericobject_unusedtypes")) {
-
-            $migration->displayMessage("Updating $table adding field purge_genericobject_unusedtypes");
-
-            $migration->addField($table, "purge_genericobject_unusedtypes",
-                                 "tinyint(1) NOT NULL default '0'",
-                                 array('after'     => "purge_datemod",
-                                       'update'    => "0"));
-         }
+         $migration->displayMessage("- adding field purge_genericobject_unusedtypes");
+         $migration->addField($table, "purge_genericobject_unusedtypes", "bool",
+                              ['after' => "purge_datemod"]);
 
          // for 0.84.1
-         if (!FieldExists($table, "purge_all")) {
-
-            $migration->displayMessage("Updating $table adding fiel purge_all");
-
-            $migration->addField($table, "purge_all", "tinyint(1) NOT NULL default '0'",
-                                 array('after'     => "purge_genericobject_unusedtypes",
-                                       'update'    => "0"));
-         }
+         $migration->displayMessage("- adding field purge_all");
+         $migration->addField($table, "purge_all", "bool",
+                              ['after' => "purge_genericobject_unusedtypes"]);
+         $migration->displayMessage("- adding field purge_user_auth_changes");
          $migration->addfield($table, 'purge_user_auth_changes', 'bool');
+
+         // for 1.3.0
+         $migration->displayMessage("- adding field purge_software_computer_install");
+         $migration->addField($table, "purge_software_computer_install", "bool",
+                              ['after' => "purge_computer_software_install"]);
       }
 
       $migration->executeMigration();

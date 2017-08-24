@@ -68,7 +68,18 @@ class PluginPurgelogsPurge extends CommonDBTM {
       $month = self::getDateModRestriction($config->fields['purge_computer_software_install']);
       if ($month) {
          $query = "DELETE FROM `glpi_logs`
-                   WHERE `linked_action` IN (4,5) $month";
+                   WHERE `itemtype` = 'Computer'
+                     AND `linked_action` IN (4,5)
+                     $month";
+         $DB->query($query);
+      }
+
+      $month = self::getDateModRestriction($config->fields['purge_software_computer_install']);
+      if ($month) {
+         $query = "DELETE FROM `glpi_logs`
+                   WHERE `itemtype` = 'SoftwareVersion'
+                     AND `linked_action` IN (4,5)
+                     $month";
          $DB->query($query);
       }
 
