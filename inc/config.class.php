@@ -36,6 +36,8 @@ if (!defined('GLPI_ROOT')) {
 class PluginPurgelogsConfig extends CommonDBTM {
 
    static $rightname = "config";
+   const DELETE_ALL = -1;
+   const KEEP_ALL = 0;
 
    static function getConfig($update = false) {
       static $config = null;
@@ -66,20 +68,14 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<table class='tab_cadre_fixe'>";
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("Logs purge configuration", "purgelogs").
            "</th></tr>";
-      echo "<tr class='tab_bg_1'><th colspan='4'><i>".__("Change all", "purgelogs")."</i>";
-      $js = "function form_init_all(form, index) {
-               var elem = document.getElementById('purgelogs_form').elements;
-               for(var i = 0; i < elem.length; i++) {
-                  if (elem[i].type == \"select-one\") {
-                     elem[i].selectedIndex = index;
-                  }
-               }
-            }";
-      echo Html::scriptBlock($js);
+      echo "<tr class='tab_bg_1 center'><td colspan='4'><i>".__("Change all", "purgelogs")."</i>";
+      echo Html::scriptBlock("function form_init_all(value) {
+         $('#purgelogs_form .purgelog_interval select').select2('val', value);
+      }");
       self::showInterval('init_all', 0, array(
-         'on_change' => "form_init_all(this.form, this.selectedIndex);"
+         'on_change' => "form_init_all(this.selectedIndex);"
       ));
-      echo "</th></tr>";
+      echo "</td></tr>";
       echo "<input type='hidden' name='id' value='1'>";
 
       echo "<tr class='tab_bg_1'><th colspan='4'>".__("General")."</th></tr>";
@@ -126,6 +122,13 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "<td>".__("Installation/uninstallation versions on softwares", "purgelogs")."</td><td>";
       self::showInterval('purge_software_version_install',
                          $this->fields["purge_software_version_install"]);
+      echo "</td>";
+      echo "</tr>";
+
+      echo "<tr class='tab_bg_1'><td class='center'>".
+           __("Add/Remove of computers on software versions", "purgelogs")."</td><td>";
+      self::showInterval('purge_software_computer_install',
+                          $this->fields["purge_software_computer_install"]);
       echo "</td>";
       echo "</tr>";
 
@@ -229,13 +232,24 @@ class PluginPurgelogsConfig extends CommonDBTM {
    }
 
    static function showInterval($name, $value, $options=array()) {
-      $values[-1] = __("All");
-      $values[0]  = __("Never");
+      $values[self::DELETE_ALL] = __("Delete all");
+      $values[self::KEEP_ALL]   = __("Keep all");
       for ($i = 1; $i < 121; $i++) {
-         $values[$i] = $i. " "._n('month', 'months', 1);
+         $values[$i] = sprintf(_n("Delete if older than %s month",
+                                  "Delete if older than %s months",
+                                  $i),
+                               $i);
       }
-      $options['value'] = $value;
-      return Dropdown::showFromArray($name, $values, $options);
+      $options = array_merge([
+         'value'   => $value,
+         'display' => false
+      ], $options);
+
+      $out = "<div class='purgelog_interval'>";
+      $out.= Dropdown::showFromArray($name, $values, $options);
+      $out.= "</div>";
+
+      echo $out;
    }
 
    //----------------- Install & uninstall -------------------//
@@ -254,6 +268,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
             $query = "CREATE TABLE `$table` (
                      `id` int(11) NOT NULL auto_increment,
                      `purge_computer_software_install` int(11) NOT NULL default '0',
+                     `purge_software_computer_install` int(11) NOT NULL default '0',
                      `purge_software_version_install` int(11) NOT NULL default '0',
                      `purge_infocom_creation` int(11) NOT NULL default '0',
                      `purge_profile_user` int(11) NOT NULL default '0',
@@ -284,33 +299,29 @@ class PluginPurgelogsConfig extends CommonDBTM {
                   ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
                $DB->query($query) or die ($DB->error());
                //Add config
-               $config->add(array('id' => 1));
+               $config->add(['id' => 1]);
       }
 
       // Update
       if (TableExists($table)) {
+         $migration->displayMessage("Updating $table");
 
          // for 0.84
-         if (!FieldExists($table, "purge_genericobject_unusedtypes")) {
-
-            $migration->displayMessage("Updating $table adding field purge_genericobject_unusedtypes");
-
-            $migration->addField($table, "purge_genericobject_unusedtypes",
-                                 "tinyint(1) NOT NULL default '0'",
-                                 array('after'     => "purge_datemod",
-                                       'update'    => "0"));
-         }
+         $migration->displayMessage("- adding field purge_genericobject_unusedtypes");
+         $migration->addField($table, "purge_genericobject_unusedtypes", "bool",
+                              ['after' => "purge_datemod"]);
 
          // for 0.84.1
-         if (!FieldExists($table, "purge_all")) {
-
-            $migration->displayMessage("Updating $table adding fiel purge_all");
-
-            $migration->addField($table, "purge_all", "tinyint(1) NOT NULL default '0'",
-                                 array('after'     => "purge_genericobject_unusedtypes",
-                                       'update'    => "0"));
-         }
+         $migration->displayMessage("- adding field purge_all");
+         $migration->addField($table, "purge_all", "bool",
+                              ['after' => "purge_genericobject_unusedtypes"]);
+         $migration->displayMessage("- adding field purge_user_auth_changes");
          $migration->addfield($table, 'purge_user_auth_changes', 'bool');
+
+         // for 1.3.0
+         $migration->displayMessage("- adding field purge_software_computer_install");
+         $migration->addField($table, "purge_software_computer_install", "bool",
+                              ['after' => "purge_computer_software_install"]);
       }
 
       $migration->executeMigration();

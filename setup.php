@@ -29,7 +29,7 @@ along with datainjection. If not, see <http://www.gnu.org/licenses/>.
  @since     2009
  ---------------------------------------------------------------------- */
 
-define ('PLUGIN_PURGELOGS_VERSION', '1.2.2');
+define ('PLUGIN_PURGELOGS_VERSION', '1.3.0');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_purgelogs() {
