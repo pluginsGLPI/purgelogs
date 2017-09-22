@@ -48,19 +48,28 @@ function plugin_init_purgelogs() {
 
 // Get the name and the version of the plugin - Needed
 function plugin_version_purgelogs() {
-   return array ('name'           => __("Purge history", "purgelogs"),
-                 'version'        => PLUGIN_PURGELOGS_VERSION,
-                 'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
-                 'homepage'       => 'https://github.com/pluginsGLPI/purgelogs',
-                 'minGlpiVersion' => '0.85');
+   return [
+      'name'           => __("Purge history", "purgelogs"),
+      'version'        => PLUGIN_PURGELOGS_VERSION,
+      'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
+      'homepage'       => 'https://github.com/pluginsGLPI/purgelogs',
+      'requirements'   => [
+         'glpi' => [
+            'min' => '9.2',
+            'dev' => true
+         ]
+      ]
+   ];
 }
 
 // Optional : check prerequisites before install : may print errors or add to message after redirect
 function plugin_purgelogs_check_prerequisites() {
-   if (version_compare(GLPI_VERSION, '0.85', 'lt')) {
-      echo "This plugin requires GLPI 0.85+";
+   $version = rtrim(GLPI_VERSION, '-dev');
+   if (version_compare($version, '9.2', 'lt')) {
+      echo "This plugin requires GLPI 9.2";
       return false;
    }
+
    return true;
 }
 
