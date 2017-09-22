@@ -1,34 +1,35 @@
 <?php
 /*
- * @version $Id$
- LICENSE
+* @version $Id: HEADER 14684 2011-06-11 06:32:40Z remi $
+LICENSE
 
- This file is part of the purgelogs plugin.
+This file is part of the purgelogs plugin.
 
- purgelogs plugin is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
+Purgelogs plugin is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- purgelogs plugin is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
+Purgelogs plugin is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- You should have received a copy of the GNU General Public License
- along with GLPI; along with purgelogs. If not, see <http://www.gnu.org/licenses/>.
- --------------------------------------------------------------------------
+You should have received a copy of the GNU General Public License
+along with datainjection. If not, see <http://www.gnu.org/licenses/>.
+--------------------------------------------------------------------------
  @package   purgelogs
- @author    the purgelogs plugin team
- @copyright Copyright (c) 2010-2011 purgelogs plugin team
+ @author    TECLIB
+ @copyright Copyright (c) 2009-2017 purgelogs plugin team
  @license   GPLv2+
             http://www.gnu.org/licenses/gpl.txt
  @link      https://forge.indepnet.net/projects/purgelogs
  @link      http://www.glpi-project.org/
+ @link      http://www.teclib-edition.com/
  @since     2009
  ---------------------------------------------------------------------- */
 
-if (!defined('GLPI_ROOT')){
+if (!defined('GLPI_ROOT')) {
    die("Sorry. You can't access directly to this file");
 }
 
@@ -67,7 +68,18 @@ class PluginPurgelogsPurge extends CommonDBTM {
       $month = self::getDateModRestriction($config->fields['purge_computer_software_install']);
       if ($month) {
          $query = "DELETE FROM `glpi_logs`
-                   WHERE `linked_action` IN (4,5) $month";
+                   WHERE `itemtype` = 'Computer'
+                     AND `linked_action` IN (4,5)
+                     $month";
+         $DB->query($query);
+      }
+
+      $month = self::getDateModRestriction($config->fields['purge_software_computer_install']);
+      if ($month) {
+         $query = "DELETE FROM `glpi_logs`
+                   WHERE `itemtype` = 'SoftwareVersion'
+                     AND `linked_action` IN (4,5)
+                     $month";
          $DB->query($query);
       }
 
@@ -87,12 +99,16 @@ class PluginPurgelogsPurge extends CommonDBTM {
 
       $month = self::getDateModRestriction($config->fields['purge_infocom_creation']);
       if ($month) {
-         //Delete software version association
+         //Delete add infocom
          $query = "DELETE FROM `glpi_logs`
-                   WHERE `itemtype`='Software'
-                      AND `itemtype_link`='Infocom'
-                         $month
-                            AND `linked_action` IN (17)";
+                   WHERE (`itemtype`='Software'
+                          AND `itemtype_link`='Infocom'
+                          AND `linked_action` = 17
+
+                          OR `itemtype` = 'Infocom'
+                          AND `linked_action` = 20
+                         )
+                     $month";
          $DB->query($query);
       }
    }
@@ -249,19 +265,19 @@ class PluginPurgelogsPurge extends CommonDBTM {
    static function purgeAll($config) {
       global $DB;
       $month = self::getDateModRestriction($config->fields['purge_all']);
-         if ($month) {
-            $query = "DELETE FROM `glpi_logs`
-            WHERE 1 $month";
-            $DB->query($query);
-         }
+      if ($month) {
+         $query = "DELETE FROM `glpi_logs`
+                   WHERE 1 $month";
+         $DB->query($query);
+      }
    }
 
    static function getDateModRestriction($month) {
       if ($month > 0) {
          return "AND `date_mod` <= DATE_ADD(NOW(), INTERVAL -$month MONTH) ";
-      } elseif ($month == -1) {
+      } else if ($month == PluginPurgelogsConfig::DELETE_ALL) {
          return "AND 1 ";
-      } elseif ($month == 0) {
+      } else if ($month == PluginPurgelogsConfig::KEEP_ALL) {
          return false;
       }
    }
@@ -271,38 +287,34 @@ class PluginPurgelogsPurge extends CommonDBTM {
    * Check if there's no crashed tables. If there're some, skip log purge
    */
    static function canLaunchPurge() {
-         if (method_exists('DBmysql', 'checkForCrashedTables')) {
+      if (method_exists('DBmysql', 'checkForCrashedTables')) {
 
-            //Check for potential crashed tables
-            $crashed_tables = DBmysql::checkForCrashedTables();
-            if (empty($crashed_tables)) {
-               //No crashed tables, good !
-               return true;
-            } else {
-               //Some crashed tables has been detected : stop cron execution
-               Toolbox::logDebug("Cannot launch automatic action : crashed tables detected");
-               return false;
-            }
-         } else {
-            //The check function is unavailable (GLPi < 0.90.2)
+         //Check for potential crashed tables
+         $crashed_tables = DBmysql::checkForCrashedTables();
+         if (empty($crashed_tables)) {
+            //No crashed tables, good !
             return true;
+         } else {
+            //Some crashed tables has been detected : stop cron execution
+            Toolbox::logDebug("Cannot launch automatic action : crashed tables detected");
+            return false;
          }
+      } else {
+         //The check function is unavailable (GLPi < 0.90.2)
+         return true;
+      }
    }
 
    static function getLogsCount() {
-      global $DB;
-
-      $query = "SELECT count(id) as cpt FROM `glpi_logs`";
-      $result = $DB->query($query);
-      return $DB->result($result, 0, "cpt");
+      return countElementsInTable('glpi_logs');
    }
-   //----------------- Install & uninstall -------------------//
 
+   //----------------- Install & uninstall -------------------//
    static function install(Migration $migration) {
       $cron = new CronTask;
       if (!$cron->getFromDBbyName(__CLASS__, 'purgeLogs')) {
          CronTask::Register(__CLASS__, 'purgeLogs', 7 * DAY_TIMESTAMP,
-                            array('param' => 24, 'mode' => CronTask::MODE_EXTERNAL));
+                            ['param' => 24, 'mode' => CronTask::MODE_EXTERNAL]);
       }
    }
 

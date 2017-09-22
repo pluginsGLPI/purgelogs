@@ -1,25 +1,27 @@
- * @version $Id: HEADER 15930 2011-10-25 10:47:55Z jmd $
- -------------------------------------------------------------------------
- GLPI - Gestionnaire Libre de Parc Informatique
- Copyright (C) 2003-2011 by the INDEPNET Development Team.
+* @version $Id: HEADER 14684 2011-06-11 06:32:40Z remi $
+LICENSE
 
- http://indepnet.net/   http://glpi-project.org
- -------------------------------------------------------------------------
+This file is part of the purgelogs plugin.
 
- LICENSE
+Purgelogs plugin is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or
+(at your option) any later version.
 
- This file is part of GLPI.
+Purgelogs plugin is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
 
- GLPI is free software; you can redistribute it and/or modify
- it under the terms of the GNU General Public License as published by
- the Free Software Foundation; either version 2 of the License, or
- (at your option) any later version.
-
- GLPI is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU General Public License for more details.
-
- You should have received a copy of the GNU General Public License
- along with GLPI. If not, see <http://www.gnu.org/licenses/>.
- --------------------------------------------------------------------------
+You should have received a copy of the GNU General Public License
+along with datainjection. If not, see <http://www.gnu.org/licenses/>.
+--------------------------------------------------------------------------
+ @package   purgelogs
+ @author    TECLIB
+ @copyright Copyright (c) 2009-2017 purgelogs plugin team
+ @license   GPLv2+
+            http://www.gnu.org/licenses/gpl.txt
+ @link      https://forge.indepnet.net/projects/purgelogs
+ @link      http://www.glpi-project.org/
+ @link      http://www.teclib-edition.com/
+ @since     2009
