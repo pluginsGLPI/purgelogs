@@ -52,7 +52,8 @@ class PluginPurgelogsConfig extends CommonDBTM {
    }
 
    function __construct() {
-      if (TableExists($this->getTable())) {
+      global $DB;
+      if ($DB->tableExists($this->getTable())) {
          $this->getFromDB(1);
       }
    }
@@ -261,7 +262,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       $config = new self();
 
       // Install
-      if (!TableExists($table)) {
+      if (!$DB->tableExists($table)) {
             $migration->displayMessage("Installing $table");
 
             //Install
@@ -303,7 +304,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       }
 
       // Update
-      if (TableExists($table)) {
+      if ($DB->tableExists($table)) {
          $migration->displayMessage("Updating $table");
 
          // for 0.84
