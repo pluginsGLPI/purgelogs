@@ -74,7 +74,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
          $('#purgelogs_form .purgelog_interval select').select2('val', value);
       }");
       self::showInterval('init_all', 0, array(
-         'on_change' => "form_init_all(this.selectedIndex);"
+         'on_change' => "form_init_all(this.value);"
       ));
       echo "</td></tr>";
       echo "<input type='hidden' name='id' value='1'>";
