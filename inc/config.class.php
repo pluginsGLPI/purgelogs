@@ -127,7 +127,7 @@ class PluginPurgelogsConfig extends CommonDBTM {
       echo "</tr>";
 
       echo "<tr class='tab_bg_1'><td class='center'>".
-           __("Add/Remove of computers on software versions", "purgelogs")."</td><td>";
+           __("Add/Remove computers from software versions", "purgelogs")."</td><td>";
       self::showInterval('purge_software_computer_install',
                           $this->fields["purge_software_computer_install"]);
       echo "</td>";
