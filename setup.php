@@ -29,7 +29,7 @@ along with datainjection. If not, see <http://www.gnu.org/licenses/>.
  @since     2009
  ---------------------------------------------------------------------- */
 
-define ('PLUGIN_PURGELOGS_VERSION', '1.3.0');
+define ('PLUGIN_PURGELOGS_VERSION', '1.3.1');
 
 // Init the hooks of the plugins -Needed
 function plugin_init_purgelogs() {
@@ -51,8 +51,9 @@ function plugin_version_purgelogs() {
    return [
       'name'           => __("Purge history", "purgelogs"),
       'version'        => PLUGIN_PURGELOGS_VERSION,
-      'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
+      'author'         => "<a href='http://www.teclib.com'>TECLIB'</a>",
       'homepage'       => 'https://github.com/pluginsGLPI/purgelogs',
+      'license'        => 'GPLv2+',
       'requirements'   => [
          'glpi' => [
             'min' => '9.2',
