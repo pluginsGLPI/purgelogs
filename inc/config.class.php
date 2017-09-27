@@ -233,12 +233,13 @@ class PluginPurgelogsConfig extends CommonDBTM {
    }
 
    static function showInterval($name, $value, $options=array()) {
-      $values[self::DELETE_ALL] = __("Delete all");
-      $values[self::KEEP_ALL]   = __("Keep all");
+      $values[self::DELETE_ALL] = __("Delete all", "purgelogs");
+      $values[self::KEEP_ALL]   = __("Keep all", "purgelogs");
       for ($i = 1; $i < 121; $i++) {
          $values[$i] = sprintf(_n("Delete if older than %s month",
                                   "Delete if older than %s months",
-                                  $i),
+                                  $i,
+                                  "purgelogs"),
                                $i);
       }
       $options = array_merge([
