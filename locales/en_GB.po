@@ -1,6 +1,6 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PURGELOGS'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PURGELOGS package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
 # Alexandre DELAUNAY <adelaunay@teclib.com>, 2013
@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Plugin - Purgelogs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 11:16+0200\n"
-"PO-Revision-Date: 2015-09-18 12:29+0000\n"
+"POT-Creation-Date: 2016-09-15 08:45+0200\n"
+"PO-Revision-Date: 2017-09-22 15:17+0000\n"
 "Last-Translator: Jérémy MOREAU <jmoreau.dev@gmail.com>\n"
 "Language-Team: English (United Kingdom) (http://www.transifex.com/teclib/glpi-plugin-purgelogs/language/en_GB/)\n"
 "MIME-Version: 1.0\n"
@@ -18,99 +18,103 @@ msgstr ""
 "Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: setup.php:48 front/config.form.php:40 inc/config.class.php:57
-#: inc/purge.class.php:61
+#: setup.php:48 front/config.form.php:40 inc/config.class.php:58
+#: inc/purge.class.php:62
 msgid "Purge history"
 msgstr "Purge history"
 
-#: inc/config.class.php:65 inc/config.class.php:91
+#: inc/config.class.php:66
 msgid "Logs purge configuration"
 msgstr "Logs purge configuration"
 
-#: inc/config.class.php:67
+#: inc/config.class.php:68
 msgid "Change all"
 msgstr "Change all"
 
-#: inc/config.class.php:87
+#: inc/config.class.php:85
 msgid "Add relation between items"
 msgstr "Add relation between items"
 
-#: inc/config.class.php:211
-msgid "All sections"
-msgstr "All sections"
+#: inc/config.class.php:89
+msgid "Delete relation between items"
+msgstr ""
 
-#: inc/config.class.php:213
-msgid "Purge all log entries"
-msgstr "Purge all log entries"
-
-#: inc/config.class.php:123
+#: inc/config.class.php:121
 msgid "Installation/uninstallation of software on computers"
 msgstr "Installation/uninstallation of software on computers"
 
-#: inc/config.class.php:127
+#: inc/config.class.php:125
 msgid "Installation/uninstallation versions on softwares"
 msgstr "Installation/uninstallation versions on softwares"
 
-#: inc/config.class.php:136
+#: inc/config.class.php:134
 msgid "Add financial information to an item"
 msgstr "Add financial information to an item"
 
-#: inc/config.class.php:144
+#: inc/config.class.php:142
 msgid "Add/remove profiles to users"
 msgstr "Add/remove profiles to users"
 
-#: inc/config.class.php:147
+#: inc/config.class.php:145
 msgid "Add/remove groups to users"
 msgstr "Add/remove groups to users"
 
-#: inc/config.class.php:158
+#: inc/config.class.php:151
+msgid "User authentication method changes"
+msgstr ""
+
+#: inc/config.class.php:160
 msgid "OCSNG"
 msgstr "OCSNG"
 
-#: inc/config.class.php:160
+#: inc/config.class.php:162
 msgid "OCS ID Change"
 msgstr "OCS ID Change"
 
-#: inc/config.class.php:163
+#: inc/config.class.php:165
 msgid "Add from OCS"
 msgstr "Add from OCS"
 
-#: inc/config.class.php:168
+#: inc/config.class.php:170
 msgid "Link with OCS"
 msgstr "Link with OCS"
 
-#: inc/config.class.php:171
+#: inc/config.class.php:173
 msgid "Delete from OCS"
 msgstr "Delete from OCS"
 
-#: inc/config.class.php:178
+#: inc/config.class.php:180
 msgid "Add component"
 msgstr "Add component"
 
-#: inc/config.class.php:181
+#: inc/config.class.php:183
 msgid "Update component"
 msgstr "Update component"
 
-#: inc/config.class.php:186
+#: inc/config.class.php:188
 msgid "Disconnect a component"
 msgstr "Disconnect a component"
 
-#: inc/config.class.php:190
+#: inc/config.class.php:192
 msgid "Connect a component"
 msgstr "Connect a component"
 
-#: inc/config.class.php:195
+#: inc/config.class.php:197
 msgid "Delete component"
 msgstr "Delete component"
 
-#: inc/config.class.php:204
+#: inc/config.class.php:206
 msgid "Logs Webservices connections"
 msgstr "Logs Webservices connections"
 
-#: inc/config.class.php:207
+#: inc/config.class.php:209
 msgid "Old Genericobject item types"
 msgstr "Old Genericobject item types"
 
-#: inc/config.class.php:153
-msgid "User authentication method changes"
-msgstr "User authentication type changes"
+#: inc/config.class.php:213
+msgid "All sections"
+msgstr "All sections"
+
+#: inc/config.class.php:215
+msgid "Purge all log entries"
+msgstr "Purge all log entries"

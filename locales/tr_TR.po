@@ -1,15 +1,15 @@
 # SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PURGELOGS'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PURGELOGS package.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Kaya Zeren <kayazeren@gmail.com>, 2015
+# Kaya Zeren <kayazeren@gmail.com>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Plugin - Purgelogs\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-07-30 11:16+0200\n"
-"PO-Revision-Date: 2015-10-25 16:17+0000\n"
+"POT-Creation-Date: 2016-09-15 08:45+0200\n"
+"PO-Revision-Date: 2017-09-23 21:40+0000\n"
 "Last-Translator: Kaya Zeren <kayazeren@gmail.com>\n"
 "Language-Team: Turkish (Turkey) (http://www.transifex.com/teclib/glpi-plugin-purgelogs/language/tr_TR/)\n"
 "MIME-Version: 1.0\n"
@@ -18,99 +18,103 @@ msgstr ""
 "Language: tr_TR\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: setup.php:48 front/config.form.php:40 inc/config.class.php:57
-#: inc/purge.class.php:61
+#: setup.php:48 front/config.form.php:40 inc/config.class.php:58
+#: inc/purge.class.php:62
 msgid "Purge history"
 msgstr "Geçmişi temizle"
 
-#: inc/config.class.php:65 inc/config.class.php:91
+#: inc/config.class.php:66
 msgid "Logs purge configuration"
 msgstr "Günlük temizleme ayarları"
 
-#: inc/config.class.php:67
+#: inc/config.class.php:68
 msgid "Change all"
 msgstr "Tümünü değiştir"
 
-#: inc/config.class.php:87
+#: inc/config.class.php:85
 msgid "Add relation between items"
 msgstr "Ögeler arası ilişki ekle"
 
-#: inc/config.class.php:211
-msgid "All sections"
-msgstr "Tüm bölümler"
+#: inc/config.class.php:89
+msgid "Delete relation between items"
+msgstr "Ögeler arasındaki ilişkiyi sil"
 
-#: inc/config.class.php:213
-msgid "Purge all log entries"
-msgstr "Tüm günlük kayıtlarını temizle"
-
-#: inc/config.class.php:123
+#: inc/config.class.php:121
 msgid "Installation/uninstallation of software on computers"
 msgstr "Bilgisayarlar üzerinde yazılım yükleme/kaldırma "
 
-#: inc/config.class.php:127
+#: inc/config.class.php:125
 msgid "Installation/uninstallation versions on softwares"
 msgstr "Yazılımlar üzerinde sürüm yükleme/kaldırma"
 
-#: inc/config.class.php:136
+#: inc/config.class.php:134
 msgid "Add financial information to an item"
 msgstr "Bir ögeye mali bilgiler ekle"
 
-#: inc/config.class.php:144
+#: inc/config.class.php:142
 msgid "Add/remove profiles to users"
 msgstr "Kullanıcılara profil ekle/kaldır"
 
-#: inc/config.class.php:147
+#: inc/config.class.php:145
 msgid "Add/remove groups to users"
 msgstr "Kullanıcılara grup ekle/kaldır"
 
-#: inc/config.class.php:158
+#: inc/config.class.php:151
+msgid "User authentication method changes"
+msgstr "Kullanıcı kimlik doğrulama yöntemi değişiklikleri"
+
+#: inc/config.class.php:160
 msgid "OCSNG"
 msgstr "OCSNG"
 
-#: inc/config.class.php:160
+#: inc/config.class.php:162
 msgid "OCS ID Change"
 msgstr "OCS Kodunu Değiştir"
 
-#: inc/config.class.php:163
+#: inc/config.class.php:165
 msgid "Add from OCS"
 msgstr "OCS üzerinden ekle"
 
-#: inc/config.class.php:168
+#: inc/config.class.php:170
 msgid "Link with OCS"
 msgstr "OCS ile bağla"
 
-#: inc/config.class.php:171
+#: inc/config.class.php:173
 msgid "Delete from OCS"
 msgstr "OCS üzerinden sil"
 
-#: inc/config.class.php:178
+#: inc/config.class.php:180
 msgid "Add component"
 msgstr "Bileşen ekle"
 
-#: inc/config.class.php:181
+#: inc/config.class.php:183
 msgid "Update component"
 msgstr "Bileşeni güncelle"
 
-#: inc/config.class.php:186
+#: inc/config.class.php:188
 msgid "Disconnect a component"
 msgstr "Bir bileşenin bağlantısını kes"
 
-#: inc/config.class.php:190
+#: inc/config.class.php:192
 msgid "Connect a component"
 msgstr "Bir bileşen bağla"
 
-#: inc/config.class.php:195
+#: inc/config.class.php:197
 msgid "Delete component"
 msgstr "Bileşeni sil"
 
-#: inc/config.class.php:204
+#: inc/config.class.php:206
 msgid "Logs Webservices connections"
 msgstr "Web hizmetleri bağlantılarını günlüğe ekle"
 
-#: inc/config.class.php:207
+#: inc/config.class.php:209
 msgid "Old Genericobject item types"
 msgstr "Eski Genelnesne öge tipleri"
 
-#: inc/config.class.php:153
-msgid "User authentication method changes"
-msgstr "Kullanıcı kimlik doğrulama tipi değişiklikleri"
+#: inc/config.class.php:213
+msgid "All sections"
+msgstr "Tüm bölümler"
+
+#: inc/config.class.php:215
+msgid "Purge all log entries"
+msgstr "Tüm günlük kayıtlarını temizle"

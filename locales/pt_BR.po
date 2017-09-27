@@ -3,65 +3,65 @@
 # This file is distributed under the same license as the PACKAGE package.
 # 
 # Translators:
-# Alexander J. Salas B. <inactive+alexandersalas@transifex.com>, 2016
+# polar147 <andrei_simoni@hotmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: GLPI Plugin - Purgelogs\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-15 08:45+0200\n"
 "PO-Revision-Date: 2017-09-22 15:17+0000\n"
-"Last-Translator: Jérémy MOREAU <jmoreau.dev@gmail.com>\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/teclib/glpi-plugin-purgelogs/language/es_ES/)\n"
+"Last-Translator: polar147 <andrei_simoni@hotmail.com>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/teclib/glpi-plugin-purgelogs/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: es_ES\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #: setup.php:48 front/config.form.php:40 inc/config.class.php:58
 #: inc/purge.class.php:62
 msgid "Purge history"
-msgstr "Purgar historial"
+msgstr "Limpar histórico"
 
 #: inc/config.class.php:66
 msgid "Logs purge configuration"
-msgstr "Purgar registros de configuración"
+msgstr "Limpar configuração de log"
 
 #: inc/config.class.php:68
 msgid "Change all"
-msgstr "Cambiar todo"
+msgstr "Mudar todos"
 
 #: inc/config.class.php:85
 msgid "Add relation between items"
-msgstr "Agregar relación entre items"
+msgstr "Adicionar relação entre itens"
 
 #: inc/config.class.php:89
 msgid "Delete relation between items"
-msgstr ""
+msgstr "Deletar relações entre itens"
 
 #: inc/config.class.php:121
 msgid "Installation/uninstallation of software on computers"
-msgstr "Instalación/desinstalación del software en ordenadores"
+msgstr "Instalação/desinstalação de software em computadores"
 
 #: inc/config.class.php:125
 msgid "Installation/uninstallation versions on softwares"
-msgstr "Instalación/desinstalación de las versiones en softwares"
+msgstr "Instalação/desinstalação de versão de software"
 
 #: inc/config.class.php:134
 msgid "Add financial information to an item"
-msgstr "Agregar información financiera para un item"
+msgstr "Adicionar informação financeira a um item"
 
 #: inc/config.class.php:142
 msgid "Add/remove profiles to users"
-msgstr "Agregar/remover perfiles de usurios"
+msgstr "Adicionar/remover perfil para o usuário"
 
 #: inc/config.class.php:145
 msgid "Add/remove groups to users"
-msgstr "Agregar/remover grupos de usuarios"
+msgstr "Adicionar/remover grupo para o usuário"
 
 #: inc/config.class.php:151
 msgid "User authentication method changes"
-msgstr ""
+msgstr "Alterações no método de autenticação do usuário"
 
 #: inc/config.class.php:160
 msgid "OCSNG"
@@ -69,52 +69,52 @@ msgstr "OCSNG"
 
 #: inc/config.class.php:162
 msgid "OCS ID Change"
-msgstr "Cambiar ID de OCS "
+msgstr "Trocar OCS ID"
 
 #: inc/config.class.php:165
 msgid "Add from OCS"
-msgstr "Agregar desde OCS"
+msgstr "Adicionar do OCS"
 
 #: inc/config.class.php:170
 msgid "Link with OCS"
-msgstr "Vinculo con OCS"
+msgstr "Vincular com o OCS"
 
 #: inc/config.class.php:173
 msgid "Delete from OCS"
-msgstr "Eliminar desde OCS"
+msgstr "Deletar do OCS"
 
 #: inc/config.class.php:180
 msgid "Add component"
-msgstr "Agregar componente"
+msgstr "Adicionar componente"
 
 #: inc/config.class.php:183
 msgid "Update component"
-msgstr "Actualizar componente"
+msgstr "Atualizar componente"
 
 #: inc/config.class.php:188
 msgid "Disconnect a component"
-msgstr "Desconectar un componente"
+msgstr "Desconectar componente"
 
 #: inc/config.class.php:192
 msgid "Connect a component"
-msgstr "Conectar un componente"
+msgstr "Conectar componente"
 
 #: inc/config.class.php:197
 msgid "Delete component"
-msgstr "Eliminar componente"
+msgstr "Deletar componente"
 
 #: inc/config.class.php:206
 msgid "Logs Webservices connections"
-msgstr "Registros de las conexiones de los servicios Web"
+msgstr "Logs de conexões do Webservices"
 
 #: inc/config.class.php:209
 msgid "Old Genericobject item types"
-msgstr "Tipos de item del antiguo objeto genérico"
+msgstr "Antigos tipos de objeto genérico"
 
 #: inc/config.class.php:213
 msgid "All sections"
-msgstr "Todas las secciones"
+msgstr "Todas as seções"
 
 #: inc/config.class.php:215
 msgid "Purge all log entries"
-msgstr "Purgar todos las entradas del registros"
+msgstr "Limpar todos os registros do log"
