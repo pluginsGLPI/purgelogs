@@ -2,6 +2,11 @@
 
 This plugin enables object's historical purge.
 
+End of life
+-----------
+As history purge feature has been integrated into GLPI core since 9.3 version, this plugin will no longer be necessary.
+**Plugin development will be stopped as soon as GLPI 9.3 will be released into a stable version.**
+
 Contributing
 ------------
 
